@@ -3,6 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+         <!-- CSRF Token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
         <title>Call.Fit | Dashboard</title>
         
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
@@ -13,7 +16,7 @@
 
     <body class="hold-transition sidebar-mini skin-blue">
             
-        <div class="wrapper">
+        <div id="app" class="wrapper">
 
             <!-- Header Navbar -->
             @include('layouts.header')
@@ -29,36 +32,33 @@
                         <div class="row mb-2">
                             <div class="col-sm-6">
                                 <h1 class="m-0 text-dark">Starter Page</h1>
-                            </div><!-- /.col -->
+                            </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Starter Page</li>
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item active">Starter Page</li>
                                 </ol>
-                            </div><!-- /.col -->
-                        </div><!-- /.row -->
-                    </div><!-- /.container-fluid -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- /.content-header -->
 
                 <!-- Main content -->
                 <div class="content">
                     <div class="container-fluid">
-                         <section>
+                         {{-- <section>
                             @yield('content')
-                        </section>
+                        </section> --}}
+                        <router-view></router-view>
+                        <!-- set progressbar -->
+                        <vue-progress-bar></vue-progress-bar>
                     </div>
                 </div>
-                <!-- /.content -->
             </div>
 
             <!-- Footer -->
             @include('layouts.footer')
-
-            <!-- Control Sidebar -->
-            <aside class="control-sidebar control-sidebar-light">
-                <!-- Control sidebar content goes here -->
-            </aside>
             
         </div>
         <!-- ./wrapper -->

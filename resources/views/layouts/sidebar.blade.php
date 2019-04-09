@@ -3,35 +3,37 @@
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
         <img src="img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image" style="opacity: .8;">
-        <span class="brand-text font-weight-light">CALL.FIT</span>
+        <span class="brand-text font-weight-light">CALL.FIT [Ver 0.1]</span>
     </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar user panel -->
-        {{-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                <img src="img/avatar04.png" class="img-circle" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Advik Gupta</a>
+                <a href="#" class="d-block">
+                    {{ Auth::user()->name }} <span class="caret"></span>
+                </a>
             </div>
-        </div> --}}
+        </div>
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <router-link to="/dashboard" class="nav-link">
                         <i class="fas fa-tachometer-alt d-icon"></i>
                         <p class="d-text"> Dashboard </p>
-                    </a>
+                    </router-link>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link active">
+                    <router-link to="/users" class="nav-link">
                         <i class="fas fa-award d-icon"></i>
                         <p class="d-text"> Memberships </p>
-                    </a>
+                    </router-link>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
@@ -54,8 +56,8 @@
 
 
 
-                <li class="nav-header">COMMUNICATION</li>
-                </li>
+                {{-- <li class="nav-header">COMMUNICATION</li>
+                </li> --}}
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="fas fa-bullhorn d-icon"></i>
@@ -96,6 +98,26 @@
                             <span class="right badge badge-danger">New</span>
                         </p>
                     </a>
+                </li>
+
+
+                <li class="nav-item">
+                    <router-link to="/profile" class="nav-link">
+                        <i class="fas fa-user d-icon"></i>
+                        <p class="d-text"> Profile </p>
+                    </router-link>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                        <i class="fas fa-power-off d-icon"></i>
+                        <p>{{ __('Logout') }}</p>
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
                 </li>
                 
             </ul>

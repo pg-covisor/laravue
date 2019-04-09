@@ -13126,6 +13126,18 @@ a.text-muted:hover {
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 }@charset "UTF-8";
 
+.red {
+  color: #e3342f;
+}
+
+.green {
+  color: #38c172;
+}
+
+.blue {
+  color: #3490dc;
+}
+
 /*!
  * Font Awesome Free 5.8.1 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
@@ -18919,5 +18931,14 @@ readers do not read off random characters that represent icons */
   color: white;
   font-variant: small-caps;
   padding-left: 4px;
+}
+
+.username {
+  font-variant: small-caps;
+}
+
+.router-link-exact-active {
+  color: white !important;
+  background-color: #0e5aa7;
 }
 
