@@ -31,6 +31,10 @@ const routes = [
     {
         path: "/users",
         component: require("./components/users.vue").default
+    },
+    {
+        path: "/developer",
+        component: require("./components/developer.vue").default
     }
 ];
 
@@ -79,6 +83,22 @@ window.Toast = Toast;
 // Custom Events
 let Fire = new Vue();
 window.Fire = Fire;
+
+// PASSPORT Components
+Vue.component(
+    "passport-clients",
+    require("./components/passport/Clients.vue").default
+);
+
+Vue.component(
+    "passport-authorized-clients",
+    require("./components/passport/AuthorizedClients.vue").default
+);
+
+Vue.component(
+    "passport-personal-access-tokens",
+    require("./components/passport/PersonalAccessTokens.vue").default
+);
 
 /**
  * The following block of code may be used to automatically register your

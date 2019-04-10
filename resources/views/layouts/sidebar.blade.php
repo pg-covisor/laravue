@@ -102,6 +102,12 @@
 
 
                 <li class="nav-item">
+                    <router-link to="/developer" class="nav-link">
+                        <i class="fas fa-code d-icon"></i>
+                        <p class="d-text"> Developer </p>
+                    </router-link>
+                </li>
+                <li class="nav-item">
                     <router-link to="/profile" class="nav-link">
                         <i class="fas fa-user d-icon"></i>
                         <p class="d-text"> Profile </p>

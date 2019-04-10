@@ -1,63 +1,80 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div class="card">
-          <div class="card-header">
-            <h3 class="card-title">Members List</h3>
+  <section>
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-6">
+            <h1>Members Managment</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item">
+                <a href="/dashboard">Home</a>
+              </li>
+              <li class="breadcrumb-item active">Members</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
 
-            <div class="card-tools">
-              <button type="button" class="btn btn-primary" @click="createUserModal">
-                <i class="fas fa-user-plus"></i>
-              </button>
+    <section class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Members List</h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-primary" @click="createUserModal">
+                  <i class="fas fa-user-plus"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="card-body table-responsive p-0">
+              <table class="table table-hover">
+                <tbody>
+                  <tr>
+                    <th>ID</th>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Mobile</th>
+                    <th>Email</th>
+                    <th>Type</th>
+                    <th>Bio</th>
+                    <th>Joined</th>
+                    <th>Action</th>
+                  </tr>
+                  <tr v-for="user in users" :key="user.id">
+                    <td>{{ user.id }}</td>
+                    <td>
+                      <img src="img/avatar04.png" class="img-circle profile-image" alt="User Image">
+                    </td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.mobile }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.type | capFirst }}</td>
+                    <td>{{ user.bio }}</td>
+                    <td>{{ user.created_at | shortDate }}</td>
+                    <td>
+                      <a href="#" @click="editUserModal(user)">
+                        <i class="far fa-edit d-icon red"></i>
+                      </a>
+                      <a href="#" @click="deleteUser(user.id)">
+                        <i class="far fa-trash-alt d-icon blue"></i>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
-          <!-- /.card-header -->
-          <div class="card-body table-responsive p-0">
-            <table class="table table-hover">
-              <tbody>
-                <tr>
-                  <th>ID</th>
-                  <th></th>
-                  <th>Name</th>
-                  <th>Mobile</th>
-                  <th>Email</th>
-                  <th>Type</th>
-                  <th>Bio</th>
-                  <th>Joined</th>
-                  <th>Action</th>
-                </tr>
-                <tr v-for="user in users" :key="user.id">
-                  <td>{{ user.id }}</td>
-                  <td>
-                    <img src="img/avatar04.png" class="img-circle profile-image" alt="User Image">
-                  </td>
-                  <td>{{ user.name }}</td>
-                  <td>{{ user.mobile }}</td>
-                  <td>{{ user.email }}</td>
-                  <td>{{ user.type | capFirst }}</td>
-                  <td>{{ user.bio }}</td>
-                  <td>{{ user.created_at | shortDate }}</td>
-                  <td>
-                    <a href="#" @click="editUserModal(user)">
-                      <i class="far fa-edit d-icon red"></i>
-                    </a>
-                    <a href="#" @click="deleteUser(user.id)">
-                      <i class="far fa-trash-alt d-icon blue"></i>
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <!-- /.card-body -->
         </div>
-        <!-- /.card -->
       </div>
-    </div>
+    </section>
 
-    <!-- Add New Member Modal -->
-    <div
+    <!-- User Modal -->
+    <section
       class="modal fade"
       id="userModal"
       tabindex="-1"
@@ -73,6 +90,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
+
           <form
             id="userForm"
             @submit.prevent="modalMode ? createUser() : editUser()"
@@ -190,6 +208,7 @@
                 <has-error :form="form" field="terms"></has-error>
               </div>
             </div>
+
             <div class="modal-footer">
               <button type="button" class="btn btn-warning" @click="resetForm">Reset</button>
               <button :disabled="form.busy" type="submit" class="btn btn-primary">{{ modalAction }}</button>
@@ -197,8 +216,8 @@
           </form>
         </div>
       </div>
-    </div>
-  </div>
+    </section>
+  </section>
 </template>
 
 <script>

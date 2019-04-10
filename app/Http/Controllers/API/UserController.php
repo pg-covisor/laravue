@@ -10,6 +10,17 @@ use App\User;
 class UserController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -42,12 +53,53 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         //
+    }
+
+    public function fetchProfile() {
+        return auth('api')->user();
+    }
+
+     public function updateProfile(Request $request) {
+        // Fetch existing user object from db
+        $user = auth('api')->user();
+        
+        // Validate form data AUTHENTICATION
+        $this->validateUpdatedData($user);
+
+        // Assert whether user changed photo
+        $currentPhoto = $user->photo;
+        if($request->photo != $currentPhoto){
+            // Extract file extension
+            $name = time().'.' . explode('/', explode(':', substr($request->photo, 0, strpos($request->photo, ';')))[1])[1];
+            // Convert Base64 to image
+            \Image::make($request->photo)->save(public_path('img/profile/').$name);
+            // Update photo name in request
+            $request->merge(['photo' => $name]);
+            // Delete old photo
+            $userPhoto = public_path('img/profile/').$currentPhoto;
+            if(file_exists($userPhoto)){
+                @unlink($userPhoto);
+            }
+        }
+
+        // Request password field is EMPTY
+        if(empty($request->password)){
+            $request->merge(['password' => $user->password]);
+        } else { // User CHANGED PASSWORD
+            $this->validatePassword();
+            $request->merge(['password' => Hash::make($request['password'])]);
+        }
+
+        // Write to DATABASE
+        $user->update($request->all());
+        // Return success message
+        return ['message' => "Success"];
     }
 
     /**
@@ -96,9 +148,15 @@ class UserController extends Controller
             'name' => 'required|string|max:191',
             'mobile' => 'required|digits:10',
             'email' => 'bail|required|max:255|email|unique:users,email,'.$user->id,
-            'password' => 'sometimes|string|min:8',
-            'type' => 'required|string|max:50',
-            'bio' => 'string|max:255',
+            'bio' => 'sometimes|required|string|max:255',
+            'photo' => 'string|sometimes',
+        ]);
+    }
+
+    protected function validatePassword() 
+    {
+        return request()->validate([
+            'password' => 'sometimes|required|min:8'
         ]);
     }
 }
