@@ -41,7 +41,13 @@
         <!-- ./wrapper -->
 
     <!-- REQUIRED JS SCRIPTS -->
-    <script src="js/app.js"></script>
-
+        @auth    
+        <script>
+            // It is going to store the current authenticated user in window.user object
+            // which we can access later in app.js file to create Gate instance
+            window.user = @json(auth()->user());
+        </script>
+        @endauth
+        <script src="js/app.js"></script>
     </body>
 </html>

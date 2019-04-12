@@ -32,3 +32,13 @@ $fa-font-path: "../webfonts";
 .blue {
     color: $blue;
 }
+
+.error-header {
+    margin: 0 !important;
+    padding: 0 !important;
+    height:40px;
+    line-height:40px;
+    font-weight:700;
+    color: white;
+    background-color: #ea0000;
+}

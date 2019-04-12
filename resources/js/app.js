@@ -8,6 +8,10 @@ require("./bootstrap");
 
 window.Vue = require("vue");
 
+// Make Gate globally accessible
+import Gate from "./Gate";
+Vue.prototype.$gate = new Gate(window.user);
+
 import { Form, HasError, AlertError } from "vform";
 window.Form = Form;
 Vue.component(HasError.name, HasError);
@@ -35,6 +39,10 @@ const routes = [
     {
         path: "/developer",
         component: require("./components/developer.vue").default
+    },
+    {
+        path: "*",
+        component: require("./components/PageNotFound.vue").default
     }
 ];
 
@@ -100,6 +108,14 @@ Vue.component(
     require("./components/passport/PersonalAccessTokens.vue").default
 );
 
+// Other Components
+Vue.component(
+    "page-not-found",
+    require("./components/PageNotFound.vue").default
+);
+
+Vue.component("pagination", require("laravel-vue-pagination"));
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -124,9 +140,19 @@ Vue.component(
 
 const app = new Vue({
     el: "#app",
-    router
-});
+    router,
+    data() {
+        return {
+            search: ""
+        };
+    },
+    methods: {
+        searchit: _.debounce(() => {
+            Fire.$emit("searching");
+        }, 1000),
 
-// const app = new Vue({
-//     router
-// }).$mount("#app");
+        printme() {
+            window.print();
+        }
+    }
+});

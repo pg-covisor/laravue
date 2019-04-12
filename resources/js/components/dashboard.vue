@@ -4,8 +4,8 @@
       <div class="col-md-8">
         <div class="card">
           <div class="card-header">Dashboard Component</div>
-
-          <div class="card-body">I'm an example component.</div>
+            <page-not-found></page-not-found>
+          <!-- <div class="card-body">I'm an example component.</div> -->
         </div>
       </div>
     </div>

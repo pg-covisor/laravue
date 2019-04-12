@@ -16,6 +16,7 @@
             <div class="info">
                 <a href="#" class="d-block">
                     {{ Auth::user()->name }} <span class="caret"></span>
+                    (<em>{{ Auth::user()->type }}</em>)
                 </a>
             </div>
         </div>
@@ -29,12 +30,16 @@
                         <p class="d-text"> Dashboard </p>
                     </router-link>
                 </li>
+
+                @can('isAdmin')   
                 <li class="nav-item">
                     <router-link to="/users" class="nav-link">
                         <i class="fas fa-award d-icon"></i>
                         <p class="d-text"> Memberships </p>
                     </router-link>
                 </li>
+                @endcan
+
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="fas fa-prescription-bottle d-icon"></i>
@@ -100,13 +105,15 @@
                     </a>
                 </li>
 
-
+                @can('isAdmin')    
                 <li class="nav-item">
                     <router-link to="/developer" class="nav-link">
                         <i class="fas fa-code d-icon"></i>
                         <p class="d-text"> Developer </p>
                     </router-link>
                 </li>
+                @endcan
+
                 <li class="nav-item">
                     <router-link to="/profile" class="nav-link">
                         <i class="fas fa-user d-icon"></i>
