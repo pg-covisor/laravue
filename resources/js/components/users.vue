@@ -1,20 +1,8 @@
 <template>
   <div>
     <!-- Error Page for Unauthorised Users -->
-    <div class="text-center" v-show="!$gate.canAccessAllMember()">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-md-8">
-            <div class="card text-center mt-5">
-              <div class="card-header error-header">Unauthorized Access Restricted</div>
-              <page-not-found></page-not-found>
-              <div class="card-body">
-                <h5>Oops! seems like you don't have proper authorization to access this page</h5>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div v-show="!$gate.canAccessAllMember()">
+      <unauthorized-access></unauthorized-access>
     </div>
 
     <!-- ONLY ADMIN HAS ACCESS TO THIS SECTION -->

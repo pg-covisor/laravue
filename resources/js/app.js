@@ -42,7 +42,7 @@ const routes = [
     },
     {
         path: "*",
-        component: require("./components/PageNotFound.vue").default
+        component: require("./components/error/PageNotFound.vue").default
     }
 ];
 
@@ -111,7 +111,12 @@ Vue.component(
 // Other Components
 Vue.component(
     "page-not-found",
-    require("./components/PageNotFound.vue").default
+    require("./components/error/PageNotFound.vue").default
+);
+
+Vue.component(
+    "unauthorized-access",
+    require("./components/error/UnauthorizedAccess.vue").default
 );
 
 Vue.component("pagination", require("laravel-vue-pagination"));
